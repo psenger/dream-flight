@@ -60,7 +60,7 @@ Written by Philip A Senger
 
 | Mandate  | Name      | Purpose                       | eg |
 |:---------|:----------|:------------------------------|:---|
-| optional | PORT      | The Port number that the API should listen to. The default if not set is 3000 | ``export PORT=8080`` |
+| required | PORT      | The Port number that the API should listen to. The default if not set is 3000 | ``export PORT=8080`` |
 | required | NODE_ENV  | When you deploy to production, set this to 'production' to control the level of logging. | `export NODE_ENV=production`  |
 
 ### Development and Testing
