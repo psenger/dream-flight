@@ -235,11 +235,15 @@ We're looking to guage your skill on creating a new service from scratch, so ple
   
 ## Deployment:
 
-This service was deployed to AWS Elastic Bean Stalk.
+This service was deployed to AWS Elastic Bean Stalk. Nothing fancy.
   
 ## Developer Notes
 
-Im pretty happy with these results. If I could get time to do a few more things:
+Im pretty happy with these results and *I HAD FUN!* If I could get time to do a few more things:
+
+1. Error logging and reporting
+2. Integration tests
+3. SRP for the the transformer handler, but this is good for now.
 
 # Known Issues
 
