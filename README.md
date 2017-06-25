@@ -1,6 +1,6 @@
 # Dream Flight
 
-A wonder example of a REST-ful api using [Restify](http://restify.com/) incorproating some of my thoughs on [Best Practices for Building REST Apis](https://github.com/psenger/Best-Practices-For-Rest-API). The application simply accepts an array of flights, filters them, transforms the results, and returns them all in a functional, composition fashion.
+A wonderful example of a REST-ful api using [Restify](http://restify.com/) incorporating some of my thoughts on [Best Practices for Building REST Apis](https://github.com/psenger/Best-Practices-For-Rest-API). The application simply accepts an array of flights, filters them, transforms the results, and returns them all in a Functional, Single Responsibility Principle, Composition fashion.
 
 Written by Philip A Senger
 
@@ -11,6 +11,8 @@ Written by Philip A Senger
 <!-- toc -->
 
   * [Status](#status)
+    + [Master Branch](#master-branch)
+    + [Development Branch](#development-branch)
   * [Environment Variables](#environment-variables)
     + [Production](#production)
     + [Development and Testing](#development-and-testing)
@@ -23,6 +25,8 @@ Written by Philip A Senger
     + [`npm start`](#npm-start)
     + [`npm test`](#npm-test)
     + [`npm run doc`](#npm-run-doc)
+  * [Versions](#versions)
+  * [Directory Structure](#directory-structure)
   * [Technologies used](#technologies-used)
   * [Requirements](#requirements)
     + [Error handling](#error-handling)
@@ -34,8 +38,12 @@ Written by Philip A Senger
 
 ## Status
 
+### Master Branch
 [![Build Status](https://travis-ci.org/psenger/dream-flight.svg?branch=master)](https://travis-ci.org/psenger/dream-flight)
 [![Coverage Status](https://coveralls.io/repos/github/psenger/dream-flight/badge.svg?branch=master)](https://coveralls.io/github/psenger/dream-flight?branch=master)
+
+### Development Branch
+[![Build Status](https://travis-ci.org/psenger/dream-flight.svg?branch=master)](https://travis-ci.org/psenger/dream-flight)
 
 ## Environment Variables
 
