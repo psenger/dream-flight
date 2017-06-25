@@ -7,9 +7,10 @@ const describe = require('mocha').describe,
   assert = require('chai').assert,
   sinon = require('sinon');
 
-let InvalidArgumentError = require('../../../errors/index').InvalidArgumentError;
-let transformFlights = require('./transformFlight');
-let mocks = Object.freeze(require('../../../../mock/mock.json'));
+const reducers = require('../../../reducers/v1.0.0/index');
+const InvalidArgumentError = require('../../../errors/index').InvalidArgumentError;
+const transformFlight = require('./transformFlight');
+const mocks = Object.freeze(require('../../../../mock/mock.json'));
 
 let mockWithMissingData = [
   {
@@ -36,20 +37,20 @@ let mockWithMissingData = [
 describe('HANDLER:', function () {
   describe('transformFlight.js', function () {
     context('1.0.0', function () {
-      const transformFlight = Object.freeze(transformFlights);
-      let debug, info, error, send, req, res, next;
+      // const transformFlight = Object.freeze(transformFlights);
+      let debugLog, infoLog, errorLog, send, req, res, next;
       beforeEach(function () {
-        debug = sinon.spy();
-        info = sinon.spy();
-        error = sinon.spy();
+        debugLog = sinon.spy();
+        infoLog = sinon.spy();
+        errorLog = sinon.spy();
         send = sinon.spy();
         req = {
           body: null,
           flights: null,
           log: {
-            debug: debug,
-            error: error,
-            info: info
+            debug: debugLog,
+            error: errorLog,
+            info: infoLog
           }
         };
         res = {
@@ -60,19 +61,19 @@ describe('HANDLER:', function () {
       describe('transformFlight', function () {
         it('should call next with a parameter of InvalidArgumentError if the req.flights is null', function () {
           req.flights = null;
-          transformFlight(req, res, next);
+          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
           assert.isTrue(next.called);
           assert.isTrue(next.calledWith(InvalidArgumentError));
         });
         it('should call next with a parameter of InvalidArgumentError if the req.flights is undefined', function () {
           delete req.flights;
-          transformFlight(req, res, next);
+          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
           assert.isTrue(next.called);
           assert.isTrue(next.calledWith(InvalidArgumentError));
         });
         it('should call next with a parameter of InvalidArgumentError if the req.flights is not an array', function () {
           req.flights = { monkey: 'go boom boom' };
-          transformFlight(req, res, next);
+          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
           assert.isTrue(next.called);
           assert.isTrue(next.calledWith(InvalidArgumentError));
         });
@@ -80,21 +81,23 @@ describe('HANDLER:', function () {
           req.flights = [...mockWithMissingData];
           delete req.flights[0].departure;
           delete req.flights[0].arrival;
-          transformFlight(req, res, next);
+          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
           assert(next.calledOnce);
-          assert(error.calledOnce);
+          // @TODO: PAS - turned this off because we are not passing the log object to the reducer anymore.
+          // assert(errorLog.calledOnce);
           assert(send.calledWith({ flights: [{ flight: '', origin: '', destination: '', departureTime: '' }] }));
         });
         it('should produce the correct results, with blanks for the values if the expected flight object is shallow wrong', function () {
           req.flights = [...mockWithMissingData];
-          transformFlight(req, res, next);
+          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
           assert(next.calledOnce);
-          assert(error.calledOnce);
+          // @TODO: PAS - turned this off because we are not passing the log object to the reducer anymore.
+          // assert(errorLog.calledOnce);
           assert(send.calledWith({ flights: [{ flight: '', origin: '', destination: '', departureTime: '' }] }));
         });
         it('should produce the correct results transformed', function () {
           req.flights = mocks.validResponse.flights;
-          transformFlight(req, res, next);
+          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
           assert(next.calledOnce);
           assert(send.calledWith({
             flights: [{
