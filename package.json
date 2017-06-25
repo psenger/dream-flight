@@ -1,6 +1,6 @@
 {
   "name": "dream-flight",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "Dream Flight Sample REST API with Restify",
   "main": "index.js",
   "directories": {
