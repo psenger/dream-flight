@@ -9,7 +9,7 @@ const InvalidArgumentError = require('../../../errors/index').InvalidArgumentErr
  *
  * @public
  * @function
- * @param {function(*,number,[])} filterFunction - The function that will be passed to the <code>Array.prototype.filter</code> on flights.
+ * @param {function(T=, number=, Array.<T>=)} filterFunction - The function that will be passed to the <code>Array.prototype.filter</code> on flights.
  * @return {function(*, *, *)}
  */
 const flightFilter = (filterFunction) => {
@@ -29,6 +29,9 @@ const flightFilter = (filterFunction) => {
     // log.info('Enter flightFilter');
     if (req && req.flights && Array.isArray(req.flights)) {
       req.flights = req.flights.filter(filterFunction);
+
+      console.log( 'flightFilter =',JSON.stringify(req.flights,'\t',4) );
+
       return next();
     } else {
       return next(InvalidArgumentError);
