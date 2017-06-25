@@ -1,6 +1,6 @@
 {
   "name": "dream-flight",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Dream Flight Sample REST API with Restify",
   "main": "index.js",
   "directories": {
@@ -10,8 +10,8 @@
   "scripts": {
     "start": "node --harmony ./scripts/start",
     "test": "mocha \"./src/**/*.spec.js\" --coverage",
-    "test:integration": "mocha \"./integration/**/*.spec.js\" --coverage",
     "doc": "node --harmony ./scripts/api-doc && markdown-toc -i README.md",
+    "test:integration": "mocha \"./integration/**/*.spec.js\" --coverage",
     "test:coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {

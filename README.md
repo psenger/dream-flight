@@ -1,6 +1,6 @@
 # Dream Flight
 
-A wonderful example of a REST-ful api using [Restify](http://restify.com/) incorporating some of my thoughts on [Best Practices for Building REST Apis](https://github.com/psenger/Best-Practices-For-Rest-API). The application simply accepts an array of flights, filters them, transforms the results, and returns them all in a Functional, Single Responsibility Principle, Composition fashion.
+A wonderful example of a REST-ful api using [Restify](http://restify.com/) incorporating some of my thoughts on [Best Practices for Building REST Api](https://github.com/psenger/Best-Practices-For-Rest-API). The application simply accepts an array of flights, filters them, transforms the results, and returns them all in a Functional, Single Responsibility Principle, Composition fashion.
 
 Written by Philip A Senger
 
@@ -10,33 +10,41 @@ Written by Philip A Senger
 
 <!-- toc -->
 
-  * [Status](#status)
+  * [Deployed Endpoint](#deployed-endpoint)
+  * [Build and Cover Status](#build-and-cover-status)
     + [Master Branch](#master-branch)
     + [Development Branch](#development-branch)
   * [Environment Variables](#environment-variables)
     + [Production](#production)
     + [Development and Testing](#development-and-testing)
+  * [Available Scripts for Command Line](#available-scripts-for-command-line)
+    + [`npm start`](#npm-start)
+    + [`npm test`](#npm-test)
+    + [`npm run doc`](#npm-run-doc)
+    + [`npm run test:integration`](#npm-run-testintegration)
+    + [`npm run test:coverage`](#npm-run-testcoverage)
   * [API Docs for Dream Flight, version 1.0.0](#api-docs-for-dream-flight-version-100)
     + [Endpoints](#endpoints)
       - [POST /flight](#post-flight)
         * [Response: 200](#response-200)
         * [Response: 409](#response-409)
-  * [Available Scripts for Command Line](#available-scripts-for-command-line)
-    + [`npm start`](#npm-start)
-    + [`npm test`](#npm-test)
-    + [`npm run doc`](#npm-run-doc)
   * [Versions](#versions)
   * [Directory Structure](#directory-structure)
   * [Technologies used](#technologies-used)
   * [Requirements](#requirements)
     + [Error handling](#error-handling)
     + [Deploying](#deploying)
+  * [Deployment:](#deployment)
   * [Developer Notes](#developer-notes)
 - [Known Issues](#known-issues)
 
 <!-- tocstop -->
 
-## Status
+## Deployed Endpoint
+
+[/flights](http://dream-flight.ap-southeast-2.elasticbeanstalk.com/flights)
+
+## Build and Cover Status
 
 ### Master Branch
 [![Build Status](https://travis-ci.org/psenger/dream-flight.svg?branch=master)](https://travis-ci.org/psenger/dream-flight)
@@ -46,28 +54,53 @@ Written by Philip A Senger
 [![Build Status](https://travis-ci.org/psenger/dream-flight.svg?branch=development)](https://travis-ci.org/psenger/dream-flight)
 [![Coverage Status](https://coveralls.io/repos/github/psenger/dream-flight/badge.svg?branch=development)](https://coveralls.io/github/psenger/dream-flight?branch=development)
 
-
 ## Environment Variables
 
 ### Production
 
-| Mandate  | Name      | Purpose                       | ex |
+| Mandate  | Name      | Purpose                       | eg |
 |:---------|:----------|:------------------------------|:---|
 | optional | PORT      | The Port number that the API should listen to. The default if not set is 3000 | ``export PORT=8080`` |
 | required | NODE_ENV  | When you deploy to production, set this to 'production' to control the level of logging. | `export NODE_ENV=production`  |
 
 ### Development and Testing
 
-| Mandate  | Name      | Purpose                       | ex |
+| Mandate  | Name      | Purpose                       | eg |
 |:---------|:----------|:------------------------------|:---|
 | optional | PORT      | The Port number that the API should listen to. The default if not set is 3000 | ``export PORT=8080`` |
-| optional | NODE_ENV  | whne not set, this assumes the mode is development | `export NODE_ENV=development`  |
+| optional | NODE_ENV  | When not set, this assumes the mode is development | `export NODE_ENV=development`  |
 
+## Available Scripts for Command Line
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the rest app. If the ``PORT`` is not set, then the default is 3000<br>
+Open [http://localhost:3000](http://localhost:3000) 
+
+### `npm test`
+
+Launches the test runner [Mocha](https://mochajs.org/) against the unit tests and calculates the coverage.
+
+### `npm run doc`
+
+Builds the documentation, reading the swagger file and injecting it and table of contents markdown scripts.
+
+### `npm run test:integration`
+
+Assumes the server is running on local host 3000 and runs a handful of integration tests.
+
+### `npm run test:coverage`
+
+Launches the test runner [Mocha](https://mochajs.org/) against the unit tests, calculates the coverage, and sends the results to coveralls.io.<br>
+
+_NOTE: this should only be done by the CI_
 
 <!--START api-doc-->
 ## API Docs for Dream Flight, version 1.0.0
 
-Base URL: http://petstore.swagger.io/
+Base URL: http://dream-flight.ap-southeast-2.elasticbeanstalk.com/
 
 - [Endpoints](#endpoints)
   - [POST /flight](#post-flight)
@@ -119,23 +152,6 @@ Invalid Argument
   - message (string) (optional)
 
 <!--END api-doc-->
-
-## Available Scripts for Command Line
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development local mode.<br>
-Open [http://localhost:3000](http://localhost:3000) 
-
-### `npm test`
-
-Launches the test runner [Mocha](https://mochajs.org/) and calculates the coverage.
-
-### `npm run doc`
-
-Builds the the documentation, reading the swagger and toc markdown scripts.
 
 ## Versions
 
@@ -217,13 +233,19 @@ Once completed, deploy your service so we can run it remotely. We would suggest 
 
 We're looking to guage your skill on creating a new service from scratch, so please create this as a standalone service and deploy it at the root of a domain (http://myproject.herokuapp.com/flight) - both of these services should do this by default.
   
+## Deployment:
+
+This service was deployed to AWS Elastic Bean Stalk.
+  
 ## Developer Notes
 
 Im pretty happy with these results. If I could get time to do a few more things:
 
-
 # Known Issues
 
-1.
+1. Logging is not perfect, and we need to identify how to notify a service if there are problems, namely bad calls and errors
+2. No mention of CORS in the requirements
+3. No mention of SSL and or security and DOS filters.
+4. The transform flight handler, should be broken down into two funcions for the purpose of SRP. One should transform the other should just send the results.
 
 
