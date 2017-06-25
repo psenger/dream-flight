@@ -1,0 +1,42 @@
+{
+  "name": "dream-flight",
+  "version": "1.0.0",
+  "description": "Dream Flight Sample REST API with Restify",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "private": true,
+  "scripts": {
+    "start": "node --harmony ./scripts/start",
+    "test": "nyc mocha \"./src/**/*.spec.js\" --coverage",
+    "doc": "node --harmony ./scripts/api-doc && markdown-toc -i README.md",
+    "test:coverage": "nyc mocha \"./src/**/*.spec.js\" --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.10",
+    "restify": "^4.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "coveralls": "^2.13.1",
+    "markdown-toc": "^1.1.0",
+    "mocha": "^3.4.2",
+    "nyc": "^11.0.2",
+    "sinon": "^2.3.5",
+    "swagger-md": "^2.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psenger/dream-flight.git"
+  },
+  "keywords": [
+    "restify"
+  ],
+  "author": "Philip A Senger <philip.a.senger@cngrgroup.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/psenger/dream-flight/issues"
+  },
+  "homepage": "https://github.com/psenger/dream-flight#readme"
+}
