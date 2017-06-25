@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node --harmony ./scripts/start",
     "test": "mocha \"./src/**/*.spec.js\" --coverage",
+    "test:integration": "mocha \"./integration/**/*.spec.js\" --coverage",
     "doc": "node --harmony ./scripts/api-doc && markdown-toc -i README.md",
     "test:coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
