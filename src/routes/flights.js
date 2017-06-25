@@ -10,7 +10,7 @@ module.exports = function (server) {
   server.post({
     path: '/flights',
     version: '1.0.0'
-  }, validateParametersFilter, notACodeShareFlightFilter, departSydOrArriveSydFilter, transformHandler(reducers.flattenFlight, { flights: [] }));
+  }, validateParametersFilter, notACodeShareFlightFilter, departSydOrArriveSydFilter, transformHandler(reducers.flattenFlight));
 
   return server;
 };

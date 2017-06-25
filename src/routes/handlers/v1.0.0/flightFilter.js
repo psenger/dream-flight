@@ -29,9 +29,6 @@ const flightFilter = (filterFunction) => {
     // log.info('Enter flightFilter');
     if (req && req.flights && Array.isArray(req.flights)) {
       req.flights = req.flights.filter(filterFunction);
-
-      console.log( 'flightFilter =',JSON.stringify(req.flights,'\t',4) );
-
       return next();
     } else {
       return next(InvalidArgumentError);

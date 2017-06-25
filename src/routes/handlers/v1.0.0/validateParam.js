@@ -12,7 +12,6 @@ const InvalidArgumentError = require('../../../errors/index').InvalidArgumentErr
  */
 const validateParam = (req, res, next) => {
   let { log } = req;
-  log.info('Enter validateParam');
   if (req && req.body && Array.isArray(req.body.flights)) {
     req.flights = req.body.flights;
     return next();

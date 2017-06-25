@@ -61,19 +61,19 @@ describe('HANDLER:', function () {
       describe('transformFlight', function () {
         it('should call next with a parameter of InvalidArgumentError if the req.flights is null', function () {
           req.flights = null;
-          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
+          transformFlight(reducers.flattenFlight)(req, res, next);
           assert.isTrue(next.called);
           assert.isTrue(next.calledWith(InvalidArgumentError));
         });
         it('should call next with a parameter of InvalidArgumentError if the req.flights is undefined', function () {
           delete req.flights;
-          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
+          transformFlight(reducers.flattenFlight)(req, res, next);
           assert.isTrue(next.called);
           assert.isTrue(next.calledWith(InvalidArgumentError));
         });
         it('should call next with a parameter of InvalidArgumentError if the req.flights is not an array', function () {
           req.flights = { monkey: 'go boom boom' };
-          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
+          transformFlight(reducers.flattenFlight)(req, res, next);
           assert.isTrue(next.called);
           assert.isTrue(next.calledWith(InvalidArgumentError));
         });
@@ -81,7 +81,7 @@ describe('HANDLER:', function () {
           req.flights = [...mockWithMissingData];
           delete req.flights[0].departure;
           delete req.flights[0].arrival;
-          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
+          transformFlight(reducers.flattenFlight)(req, res, next);
           assert(next.calledOnce);
           // @TODO: PAS - turned this off because we are not passing the log object to the reducer anymore.
           // assert(errorLog.calledOnce);
@@ -89,7 +89,7 @@ describe('HANDLER:', function () {
         });
         it('should produce the correct results, with blanks for the values if the expected flight object is shallow wrong', function () {
           req.flights = [...mockWithMissingData];
-          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
+          transformFlight(reducers.flattenFlight)(req, res, next);
           assert(next.calledOnce);
           // @TODO: PAS - turned this off because we are not passing the log object to the reducer anymore.
           // assert(errorLog.calledOnce);
@@ -97,7 +97,7 @@ describe('HANDLER:', function () {
         });
         it('should produce the correct results transformed', function () {
           req.flights = mocks.validResponse.flights;
-          transformFlight(reducers.flattenFlight, { flights: [] })(req, res, next);
+          transformFlight(reducers.flattenFlight)(req, res, next);
           assert(next.calledOnce);
           assert(send.calledWith({
             flights: [{

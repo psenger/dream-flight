@@ -6,10 +6,9 @@ const InvalidArgumentError = require('../../../errors/index').InvalidArgumentErr
  * @function
  * @public
  * @param {function()} reducer - An Array.prototype.reducer function
- * @param {*} accumulator - The object Literal that will transform the data.
  * @return {function(*=, *, *)}
  */
-const transformFlight = (reducer, accumulator) => {
+const transformFlight = (reducer) => {
 
   /**
    * Transform the flight objects and completes the request.
@@ -23,12 +22,9 @@ const transformFlight = (reducer, accumulator) => {
    */
   return (req, res, next) => {
     let { log } = req;
-    log.info('Enter transformFlight');
     if (req && req.flights && Array.isArray(req.flights)) {
       let { flights } = req;
-
-      let transformedFlights = flights.reduce(reducer, accumulator);
-
+      let transformedFlights = flights.reduce(reducer, { flights: [] });
       res.send(transformedFlights);
       return next();
     } else {
