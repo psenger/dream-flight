@@ -1,13 +1,14 @@
-.iws
 *.log
 *.pid
 *.pid.lock
 *.seed
 *.tgz
+.DS_Store
 .env
 .eslintcache
 .grunt
 .idea
+.iws
 .lock-wscript
 .node_repl_history
 .npm
