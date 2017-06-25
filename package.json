@@ -9,9 +9,9 @@
   "private": true,
   "scripts": {
     "start": "node --harmony ./scripts/start",
-    "test": "nyc mocha \"./src/**/*.spec.js\" --coverage",
+    "test": "mocha \"./src/**/*.spec.js\" --coverage",
     "doc": "node --harmony ./scripts/api-doc && markdown-toc -i README.md",
-    "test:coverage": "nyc mocha \"./src/**/*.spec.js\" --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test:coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
     "bunyan": "^1.8.10",
@@ -22,6 +22,7 @@
     "coveralls": "^2.13.1",
     "markdown-toc": "^1.1.0",
     "mocha": "^3.4.2",
+    "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^11.0.2",
     "sinon": "^2.3.5",
     "swagger-md": "^2.0.1"
