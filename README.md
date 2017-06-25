@@ -43,7 +43,9 @@ Written by Philip A Senger
 [![Coverage Status](https://coveralls.io/repos/github/psenger/dream-flight/badge.svg?branch=master)](https://coveralls.io/github/psenger/dream-flight?branch=master)
 
 ### Development Branch
-[![Build Status](https://travis-ci.org/psenger/dream-flight.svg?branch=master)](https://travis-ci.org/psenger/dream-flight)
+[![Build Status](https://travis-ci.org/psenger/dream-flight.svg?branch=development)](https://travis-ci.org/psenger/dream-flight)
+[![Coverage Status](https://coveralls.io/repos/github/psenger/dream-flight/badge.svg?branch=development)](https://coveralls.io/github/psenger/dream-flight?branch=development)
+
 
 ## Environment Variables
 
