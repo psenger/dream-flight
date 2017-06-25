@@ -7,9 +7,9 @@ const describe = require('mocha').describe,
   assert = require('chai').assert,
   sinon = require('sinon');
 
-let InvalidArgumentError = require('../../../errors/index').InvalidArgumentError;
-let flightsFilters = require('./flightFilter');
-let mocks = Object.freeze(require('../../../../mock/mock.json'));
+const InvalidArgumentError = require('../../../errors/index').InvalidArgumentError;
+const flightsFilters = require('./flightFilter');
+const mocks = Object.freeze(require('../../../../mock/mock.json'));
 
 describe('HANDLER:', function () {
   describe('flightsFilter.js', function () {
