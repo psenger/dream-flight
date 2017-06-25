@@ -1,0 +1,141 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server API Restful Flight server. You can find out more about [https://github.com/psenger/dream-flight](https://github.com/psenger/dream-flight)",
+    "version": "1.0.0",
+    "title": "API Docs for Dream Flight",
+    "contact": {
+      "email": "philip.a.senger@cngrgroup.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/psenger/dream-flight/blob/master/LICENSE"
+    }
+  },
+  "host": "dream-flight.ap-southeast-2.elasticbeanstalk.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/flight": {
+      "post": {
+        "summary": "Post a list of flights, and return flights that are not a codeshare flight, arrive or depart in SYD, and transform them.",
+        "description": "Given a list of flights that are posted as JSON objects, filter the flights that are not a codeshare flight, arrive or depart in SYD, and transform them to a list of ApiResponse Objects.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Returns a list of flights from the request, that are not a codeshare flight, and arrive or depart in SYD.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArrayOfFlights"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApiResponse"
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid Argument",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArrayOfFlights": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Flight"
+      }
+    },
+    "Flight": {
+      "type": "object",
+      "properties": {
+        "flightNumber": {
+          "type": "string",
+          "format": "integer"
+        },
+        "airline": {
+          "type": "string",
+          "format": "string"
+        },
+        "departure": {
+          "$ref": "#/definitions/Departure"
+        },
+        "arrival": {
+          "$ref": "#/definitions/Arrival"
+        }
+      }
+    },
+    "Departure": {
+      "type": "object",
+      "properties": {
+        "scheduled": {
+          "type": "string",
+          "format": "dateTime"
+        },
+        "airport": {
+          "type": "string",
+          "format": "string"
+        }
+      }
+    },
+    "Arrival": {
+      "type": "object",
+      "properties": {
+        "airport": {
+          "type": "string",
+          "format": "string"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "flight": {
+          "type": "string"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "departureTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about dream flight",
+    "url": "https://github.com/psenger/dream-flight"
+  }
+}

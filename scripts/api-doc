@@ -1,0 +1,31 @@
+#!/usr/bin/env node --harmony
+
+const swaggermd = require('swagger-md').default,
+  path = require('path'),
+  fs = require('fs');
+
+// It is also possible to pass a path to the root file of the API spec (can be json or yaml) and supports local file refs.
+const path_to_spec = path.join(__dirname, '..', 'swagger.json');
+const out_to_path = path.join(__dirname, '..', 'README.md');
+
+swaggermd.convertToMarkdown(path_to_spec).then(markdown_str => {
+
+  fs.readFile( out_to_path, 'utf8', function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+
+    let mod_markdown_str  = markdown_str.replace(/^#(.*)$/mg,'##$1');
+
+    let str = data.replace(/<!--START api-doc-->[\s\S]*?<!--END api-doc-->/, '<!--START api-doc-->\n' + mod_markdown_str + '\n<!--END api-doc-->');
+
+    fs.writeFile( out_to_path, str, function (err) {
+      if (err) {
+        return console.log(err);
+      }
+    });
+
+  });
+
+
+});
