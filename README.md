@@ -4,8 +4,6 @@ A wonderful example of a REST-ful api using [Restify](http://restify.com/) incor
 
 Written by Philip A Senger
 
-[philip.a.senger@cngrgroup.com](mailto:philip.a.senger@cngrgroup.com) | mobile: 0404466846 | [CV/Resume](http://www.visualcv.com/philipsenger) | [blog](http://www.apachecommonstipsandtricks.blogspot.com/) | [LinkedIn](http://au.linkedin.com/in/philipsenger) | [twitter](http://twitter.com/PSengerDownUndr) | [keybase](https://keybase.io/psenger)
-
 ## Table of Contents
 
 <!-- toc -->
